@@ -33,6 +33,8 @@
 	<?php echo $film->modified->i18nFormat('dd/MM/yyyy HH:mm:ss'); ?>
 </p>
 
-<p><?php echo ' '.$this->Html->link('Edit', ['action' => 'edit', $film->id]); ?></p>
+<div class="row text-center">
+	<?= $this->Html->link('Edit', ['action' => 'edit', $film->id], ['class' => 'col-3 link']); ?>
 
-<p><?= $this->Form->postLink('Supprimer', ['action' => 'delete', $film->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer ce film ?']); ?></p>
+	<?= $this->Form->postLink('Supprimer', ['action' => 'delete', $film->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer ce film ?', 'class' => 'col-3 link']); ?>
+</div>

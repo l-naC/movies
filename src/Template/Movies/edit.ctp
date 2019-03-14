@@ -10,5 +10,6 @@
 		<label>Date de sortie</label>
 		<?= $this->Form->text('releasedate', ['label'=> 'Date de sortie', 'type' => 'date', 'value' => (!empty($film->releasedate)) ? $film->releasedate->i18nFormat('yyyy-MM-dd') : '']) ?>
 	</div>
+	<?= $this->Form->control('poster', ['type' => 'file', 'label' => 'Affiche']) ?>
 <?= $this->Form->button('Modifier') ?>
 <?= $this->Form->end() ?>

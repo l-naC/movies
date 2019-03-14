@@ -1,6 +1,5 @@
 <?php //file : src/Templates/Movies/index.ctp ?>
 <p>Il y a <?= $movies->count(); ?> movie(s)</p>
-<p><?= $this->Html->link('Ajouter un film', ['action' => 'add']); ?></p>
 
 <table>
 	<tr>

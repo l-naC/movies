@@ -10,5 +10,6 @@
 		<label>Date de sortie</label>
 		<?= $this->Form->text('releasedate', ['label'=> 'Date de sortie', 'type' => 'date']) ?>
 	</div>
+	<?= $this->Form->control('poster', ['type' => 'file', 'label' => 'Affiche']) ?>
 	<?= $this->Form->button('Ajouter') ?>
 <?= $this->Form->end() ?>

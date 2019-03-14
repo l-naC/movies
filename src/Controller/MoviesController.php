@@ -30,6 +30,14 @@ class MoviesController extends AppController
         if ($this->request->is('post')) {
             // on met les données de l'utilisateur dans l'objet $new
             $new = $this->Movies->patchEntity($new, $this->request->getData());
+
+            //si le ficheir correspond a l'un des types autorisés
+            if (in_array($this->request->data['poster']['type'], array('images/png', 'images/jpg', 'image/jpeg', 'image/gif'))) {
+                
+            }else{
+                $this->Flash->error('Ce format de fichier n\'est pas autorisé');
+            }
+
             //si la sauvegard fonctionne, on confirme et on redirige vers la liste globale des citations
             if ($this->Movies->save($new)) {
                 $this->Flash->success('Ok');
