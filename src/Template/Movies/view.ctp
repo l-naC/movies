@@ -5,9 +5,14 @@
 <p>
 	<?php echo $film->title; ?>
 </p>
-<p>
-	<?php echo $film->poster; ?>
-</p>
+
+<figure>
+	<?php if (!empty($film->poster)) { ?>
+		<?= $this->Html->image('../data/posters/'.$film->poster, ['alt' => 'Affiche de :'.$film->title]) ?>
+	<?php }else{ ?>
+		<?= $this->Html->image('default.jpg', ['alt' => 'Visuel non disponible']) ?>
+	<?php } ?>
+</figure>
 <p>
 	<span class="label">Réalisateur :</span>
 	<?php  if (!empty($film->director)) { echo $film->director; }else{ echo '<span style="font-style:italic;">Anonyme</span>'; } ?>

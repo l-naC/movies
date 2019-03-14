@@ -122,6 +122,9 @@ textarea{
 figure{
     position: relative;
 }
+figure img{
+    width: 50%;
+}
 figcaption{
     position: absolute;
     bottom: 0;
