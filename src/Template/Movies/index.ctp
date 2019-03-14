@@ -12,7 +12,7 @@
 	<tr>
 		<td><?= $this->Html->link($uneLigne->title, ['action' => 'view', $uneLigne->id]); ?></td>
 		<td><?= (!empty($uneLigne->director)) ? $uneLigne->director : 'Anonyme' ?></td>
-		<td><?= (!empty($film->releasedate)) ? $film->releasedate->i18nFormat('dd/MM/yyyy') : '' ; ?></td>
+		<td><?php if(!empty($uneLigne->releasedate)) { echo $uneLigne->releasedate->i18nFormat('dd/MM/yyyy'); }else{ echo ''; } ?></td>
 	</tr>
 	<?php endforeach; ?>
 </table>

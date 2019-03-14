@@ -4,6 +4,8 @@
 //A quel espace de logique au quel il appartient. Donc juste son espace logique
 namespace App\Controller;
 
+use Cake\Http\Exception\NotFoundException;
+
 class MoviesController extends AppController
 {
 	public function index()
@@ -39,5 +41,48 @@ class MoviesController extends AppController
         }
         //Envoie la variable dans la vue
         $this->set(compact('new'));
+    }
+
+    public function edit($id)
+    {
+        //On recupere les donnée du film
+        $film = $this->Movies->get($id);
+
+        if ($this->request->is(['post', 'put'])) {
+            // si on passe le patchEntity sans le mettre dans une variable, seul les champs modifié seront envoyés dans la requete
+            $this->Movies->patchEntity($film, $this->request->getData());
+            //si la sauvegard fonctionne, on confirme et on redirige vers la liste globale des films
+            if ($this->Movies->save($film)) {
+                $this->Flash->success('Modif ok');
+                //return vers la page de ce film
+                return $this->redirect(['action' => 'view', $film->id]);
+            }
+            //si ca a planté on queule sur l'internaute
+            $this->Flash->error('Modif planté');
+        }
+        $this->set(compact('film'));
+    }
+
+    public function delete($id)
+    {
+        //si on est en post ou en delete, on fait l'action
+        if($this->request->is(['post', 'delete'])){
+            //On recupere les donnée du film
+            $movie = $this->Movies->get($id);
+
+            if ($this->Movies->delete($movie)) {
+                $this->Flash->success('Supprimé');
+                //return vers la page de la lists des films
+                return $this->redirect(['action' => 'index']);
+            }else{
+                $this->Flash->error('Supprimession planté');
+                //return vers la page de ce film
+                return $this->redirect(['action' => 'view', $id]);
+            }
+        }else{
+            //sinon on declenche une erreur personnalisé
+            throw new NotFoundException('Methode interdite (c\'est pas beau de tricher)');   
+        }
+        
     }
 }

@@ -19,8 +19,14 @@ class MoviesTable extends Table
     public function validationDefault(Validator $v)
     {
         $v->notEmpty('title')
-        ->maxLength('poster', 40)
-        ->allowEmpty('poster');
+        ->maxLength('title', 300)
+        //allowEmpty = autorise le champs à être vide
+        ->allowEmpty('director')
+        ->maxLength('director', 300)
+        ->allowEmpty('poster')
+        ->allowEmpty('duration')
+        ->allowEmpty('releasedate')
+        ->allowEmpty('synopsis');
         return $v;
     }
 }
