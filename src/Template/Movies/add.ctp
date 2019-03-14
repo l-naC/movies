@@ -1,6 +1,6 @@
 <?php //file : src/Templates/Movies/add.ctp ?>
 
-<?= $this->Form->create($new) ?>
+<?= $this->Form->create($new, ['enctype' => 'multipart/form-data']) ?>
 	<h1>Ajouter un film</h1>
 	<?= $this->Form->control('title', ['label' => 'Titre']) ?>
 	<?= $this->Form->control('director', ['label' => 'Réalisateur']) ?>

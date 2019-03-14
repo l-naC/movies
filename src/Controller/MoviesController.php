@@ -24,7 +24,7 @@ class MoviesController extends AppController
 
     public function add()
     {
-        //On créer une nouvelle identité vide. Objet de type Quotes qui est vide
+        //On créer une nouvelle identité vide. Objet de type Movies qui est vide
         $new = $this->Movies->newEntity();
         // si on arrive sur cette action en methode POST
         if ($this->request->is('post')) {
@@ -32,9 +32,26 @@ class MoviesController extends AppController
             $new = $this->Movies->patchEntity($new, $this->request->getData());
 
             //si le ficheir correspond a l'un des types autorisés
-            if (in_array($this->request->data['poster']['type'], array('images/png', 'images/jpg', 'image/jpeg', 'image/gif'))) {
-                
+            if (in_array($this->request->getData()['poster']['type'], ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'])) {
+
+                //recupere l'extension qui était utilisé
+                $ext = pathinfo($this->request->getData()['poster']['name'], PATHINFO_EXTENSION);
+
+                //creation du nouveau nom
+                $name = 'a-'.rand(0,3000).'-'.time().'.'.$ext;
+
+                //reconstitution du chemin globale du fichier
+                //constane de webroot = WWW_ROOT
+                $address = WWW_ROOT.'data/posters/'.$name;
+
+                //valeur a enregistrer dans la base
+                $new->poster = $name;
+
+                //on le deplace de la memoire temporaire vers l'emplacement souhaité
+                move_uploaded_file($this->request->getData('poster')['tmp_name'], $address);
+
             }else{
+                $new->poster = null;
                 $this->Flash->error('Ce format de fichier n\'est pas autorisé');
             }
 
@@ -42,7 +59,7 @@ class MoviesController extends AppController
             if ($this->Movies->save($new)) {
                 $this->Flash->success('Ok');
 
-                return $this->redirect(['action' => 'index']);
+               return $this->redirect(['action' => 'index']);
             }
             //si ca a planté on queule sur l'internaute
             $this->Flash->error('Planté');
