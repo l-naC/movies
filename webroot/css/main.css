@@ -19,12 +19,14 @@ header {
     color: #fff;
 }
 header h1 {
+    text-align: center;
     color: #fff;
     padding: 20px;
-    background: #444;
+    background: #26bece;
 }
 header h1 a {
     color: #fff;
+    text-decoration: none;
 }
 main {
     grid-column: 2; grid-row: 1;
@@ -42,9 +44,13 @@ nav span{
     font-size: 0.9rem;
     border-top: 1px solid #ccc;
 }
+nav a {
+    margin-top: 10px;
+}
 nav a.active{
     color: #fff;
-    background: #444;
+    border-top: 1px solid #26bece;
+    border-bottom: 1px solid #26bece;
 }
 main > h1:first-child{
     font-size: 2rem;

@@ -85,4 +85,12 @@ class MoviesController extends AppController
         }
         
     }
+
+    public function random(){
+        $result = $this->Movies->find('all')
+        ->order('rand()')
+        ->firstOrFail();
+
+        $this->redirect(['action' => 'view', $result->id]);
+    }
 }
