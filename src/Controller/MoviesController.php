@@ -88,13 +88,69 @@ class MoviesController extends AppController
         $this->set(compact('film'));
     }
 
+    public function editImage($id)
+    {
+        //On recupere les donnée du film
+        $film = $this->Movies->get($id);
+
+        $old_poster = $film->poster;
+        $old = WWW_ROOT.'data/posters/'.$film->poster;
+
+        if ($this->request->is(['post', 'put'])) {
+
+            // si on passe le patchEntity sans le mettre dans une variable, seul les champs modifié seront envoyés dans la requete
+            $this->Movies->patchEntity($film, $this->request->getData());
+
+            if (in_array($this->request->getData()['poster']['type'], ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'])) {
+
+                //recupere l'extension qui était utilisé
+                $ext = pathinfo($this->request->getData()['poster']['name'], PATHINFO_EXTENSION);
+
+                //creation du nouveau nom
+                $name = 'a-'.rand(0,3000).'-'.time().'.'.$ext;
+
+                //reconstitution du chemin globale du fichier
+                //constane de webroot = WWW_ROOT
+                $address = WWW_ROOT.'data/posters/'.$name;
+
+                //valeur a enregistrer dans la base
+                $film->poster = $name;
+
+                //on le deplace de la memoire temporaire vers l'emplacement souhaité
+                move_uploaded_file($this->request->getData('poster')['tmp_name'], $address);
+
+                //si la sauvegard fonctionne, on confirme et on redirige vers la liste globale des films
+                if ($this->Movies->save($film)) {
+
+                    if (!empty($old_poster) && file_exists($old)){
+                        unlink($old);
+                    }
+
+                    $this->Flash->success('Image modifiée');
+                    //return vers la page de ce film
+
+                    return $this->redirect(['action' => 'view', $film->id]);
+
+                }else{
+                    //si ca a planté on queule sur l'internaute
+                    $this->Flash->error('Image non modifiée');
+                }
+
+            }else{
+                $film->poster = $old_poster;
+                $this->Flash->error('Ce format de fichier n\'est pas autorisé');
+            }
+        }
+        $this->set(compact('film'));
+    }
+
     public function delete($id)
     {
         //si on est en post ou en delete, on fait l'action
         if($this->request->is(['post', 'delete'])){
             //On recupere les donnée du film
             $movie = $this->Movies->get($id);
-
+            
             if ($this->Movies->delete($movie)) {
                 $this->Flash->success('Supprimé');
                 //return vers la page de la lists des films
@@ -104,6 +160,40 @@ class MoviesController extends AppController
                 //return vers la page de ce film
                 return $this->redirect(['action' => 'view', $id]);
             }
+            
+        }else{
+            //sinon on declenche une erreur personnalisé
+            throw new NotFoundException('Methode interdite (c\'est pas beau de tricher)');   
+        }
+        
+    }
+
+    public function deleteImage($id)
+    {
+        //si on est en post ou en delete, on fait l'action
+        if($this->request->is(['post', 'delete'])){
+            //On recupere les donnée du film
+            $movie = $this->Movies->get($id);
+            $old_poster= $movie->poster;
+            $old = WWW_ROOT.'data/posters/'.$movie->poster;
+            $movie->poster = null;
+            //si la sauvegard fonctionne, on confirme et on redirige vers la liste globale des films
+            if ($this->Movies->save($movie)) {
+
+                if (!empty($old_poster) && file_exists($old)){
+                    unlink($old);
+                }
+
+                $this->Flash->success('Image supprimé');
+                //return vers la page de la lists des films
+                return $this->redirect(['action' => 'view', $film->id]);
+
+            }else{
+                $this->Flash->error('Supprimession planté');
+                //return vers la page de ce film
+                return $this->redirect(['action' => 'view', $film->id]);
+            }
+            
         }else{
             //sinon on declenche une erreur personnalisé
             throw new NotFoundException('Methode interdite (c\'est pas beau de tricher)');   

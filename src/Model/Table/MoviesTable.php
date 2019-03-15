@@ -13,6 +13,7 @@ class MoviesTable extends Table
     {
     	//demande a Cake de gerer tous seul le created et modified
     	$this->addBehavior('Timestamp');
+        $this->addBehavior('Image');
     }
 
     //ennonce les regles de validations pour ce type de data

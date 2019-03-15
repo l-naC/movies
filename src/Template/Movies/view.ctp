@@ -12,6 +12,11 @@
 	<?php }else{ ?>
 		<?= $this->Html->image('default.jpg', ['alt' => 'Visuel non disponible']) ?>
 	<?php } ?>
+	<figcaption>
+		Affiche de : <?= $film->title ?>
+		<?= $this->Html->link('Edit Image', ['action' => 'edit_image', $film->id]); ?>
+		<?= $this->Form->postLink('Supprimer', ['action' => 'delete_image', $film->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer ce film ?']); ?>
+	</figcaption>
 </figure>
 <p>
 	<span class="label">Réalisateur :</span>
