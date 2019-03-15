@@ -17,8 +17,7 @@ class UsersTable extends Table
     {
         $v->notEmpty('pseudo')
         ->maxLength('pseudo', 5)
-        ->notEmpty('password')
-        ->maxLength('password', 200);
+        ->notEmpty('password');
         return $v;
     }
 }

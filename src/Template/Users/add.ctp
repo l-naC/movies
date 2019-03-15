@@ -1,7 +1,7 @@
-<?php //file : src/Templates/Movies/add.ctp ?>
+<?php //file : src/Templates/Users/add.ctp ?>
 
-<?= $this->Form->create($new, ['enctype' => 'multipart/form-data']) ?>
-	<h1>Ajouter un film</h1>
+<?= $this->Form->create($new) ?>
+	<h1>Créer un compte </h1>
 	<?= $this->Form->control('pseudo', ['label' => 'Pseudo']) ?>
 	<?= $this->Form->control('password', ['label' => 'Password', 'type' => 'password']) ?>
 	<?= $this->Form->button('Ajouter') ?>

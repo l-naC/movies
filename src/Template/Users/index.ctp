@@ -1,4 +1,4 @@
-<?php //file : src/Templates/Movies/index.ctp ?>
+<?php //file : src/Templates/Users/index.ctp ?>
 <p>Il y a <?= $users->count(); ?> user(s)</p>
 
 <table>
@@ -15,5 +15,3 @@
 	</tr>
 	<?php endforeach; ?>
 </table>
-<br>
-<?= $this->Html->link('Ajouter un film', ['controller' => 'users', 'action' => 'add'], ['class' => 'col-3 link']) ?>
