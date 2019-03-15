@@ -145,6 +145,7 @@ figcaption a{
     text-decoration: none;
     padding: 15px;
     transition: all .3s;
+    border-radius: 5px;
 }
 
 figcaption a:hover{
@@ -199,6 +200,7 @@ td:hover {
     transition: all .3s;
     z-index: 1;
     text-align: center;
+    border-radius: 5px;
 }
 
 .link:after {
@@ -207,9 +209,10 @@ td:hover {
     height: 2px;
     position: absolute;
     bottom: 0;
-    right: 1.25rem;
-    left: 1.25rem;
+    right: 1rem;
+    left: 1rem;
     background-color: #26bece;
+    border-radius: 5px;
     transition: all 0.3s;
     z-index: -1;
 }

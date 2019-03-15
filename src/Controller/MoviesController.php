@@ -181,9 +181,9 @@ class MoviesController extends AppController
             }
             $movie->poster = null;
             //si la sauvegard fonctionne, on confirme et on redirige vers la liste globale des films
-            $this->Movies->save($movie))
+            $this->Movies->save($movie);
             $this->Flash->success('Image supprimée');
-            return $this->redirect(['action' => 'view', $film->id]);
+            return $this->redirect(['action' => 'view', $movie->id]);
             
         }else{
             //sinon on declenche une erreur personnalisé
