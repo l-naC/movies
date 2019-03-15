@@ -15,7 +15,7 @@
 	<figcaption>
 		Affiche de : <?= $film->title ?>
 		<?= $this->Html->link('Edit Image', ['action' => 'edit_image', $film->id]); ?>
-		<?= $this->Form->postLink('Supprimer', ['action' => 'delete_image', $film->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer ce film ?']); ?>
+		<?= $this->Form->postLink('Supprimer', ['action' => 'delete_image', $film->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer l\'affiche de ce film ?']); ?>
 	</figcaption>
 </figure>
 <p>

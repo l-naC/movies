@@ -136,6 +136,7 @@ figcaption{
     background:rgba(0,0,0,.6);
     color: #fff;
     transition: all 0.5s;
+    text-align: center;
 }
 
 figcaption a{

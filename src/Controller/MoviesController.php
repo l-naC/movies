@@ -171,32 +171,23 @@ class MoviesController extends AppController
     public function deleteImage($id)
     {
         //si on est en post ou en delete, on fait l'action
-        if($this->request->is(['post', 'delete'])){
+        if($this->request->is(['post'])){
             //On recupere les donnée du film
             $movie = $this->Movies->get($id);
             $old_poster= $movie->poster;
             $old = WWW_ROOT.'data/posters/'.$movie->poster;
+            if (!empty($old_poster) && file_exists($old)){
+                unlink($old);
+            }
             $movie->poster = null;
             //si la sauvegard fonctionne, on confirme et on redirige vers la liste globale des films
-            if ($this->Movies->save($movie)) {
-
-                if (!empty($old_poster) && file_exists($old)){
-                    unlink($old);
-                }
-
-                $this->Flash->success('Image supprimé');
-                //return vers la page de la lists des films
-                return $this->redirect(['action' => 'view', $film->id]);
-
-            }else{
-                $this->Flash->error('Supprimession planté');
-                //return vers la page de ce film
-                return $this->redirect(['action' => 'view', $film->id]);
-            }
+            $this->Movies->save($movie))
+            $this->Flash->success('Image supprimée');
+            return $this->redirect(['action' => 'view', $film->id]);
             
         }else{
             //sinon on declenche une erreur personnalisé
-            throw new NotFoundException('Methode interdite (c\'est pas beau de tricher)');   
+            throw new NotFoundException('Access denied, try again');   
         }
         
     }
