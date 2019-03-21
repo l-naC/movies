@@ -55,4 +55,12 @@ class UsersController extends AppController
             $this->Flash->error('Votre pseudo ou mot de passe est incorrect.');
         }
     }
+
+    public function logout()
+    {
+        $this->Flash->success('À bientôt');
+        $this->Auth->logout();
+        return $this->redirect(['controller' => 'Movies', 'action' => 'index']);
+
+    }
 }

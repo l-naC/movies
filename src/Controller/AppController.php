@@ -59,6 +59,7 @@ class AppController extends Controller
                 'controller' => 'Users',
                 'action' => 'login'
             ],
+            //on redirige vers la page ou il a essayer d'acceder
             'unauthorizedRedirect' => $this->referer()
         ]);
         //listes des actions visibles sans etre connecté
@@ -69,5 +70,11 @@ class AppController extends Controller
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
          */
         //$this->loadComponent('Security');
+    }
+
+    //sera appeler avant l'affichage d'une vue (peu importe laquelle)
+    public function beforeRender(Event $event) {
+        //copie les informations de l'internaute a la vue dans une variable $auth
+        $this->set('auth', $this->Auth);
     }
 }
