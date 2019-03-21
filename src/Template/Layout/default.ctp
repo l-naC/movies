@@ -42,9 +42,7 @@ $cakeDescription = 'Gestionnaire de films';
     </header>
     <main>
         <!-- Affiche les messaegs pour l'utilisateur (et les vide de la memoire) -->
-        <div class="message">
-            <?= $this->Flash->render() ?>
-        </div>
+        <?= $this->Flash->render() ?>
         <!-- Affiche le contenu de cette page -->
         <?= $this->fetch('content') ?>
     </main>
