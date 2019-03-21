@@ -1,5 +1,4 @@
 <?php //file : src/Templates/Quotes/view.ctp 
-
 ?>
 <h1>Un film</h1>
 <p>
@@ -20,7 +19,7 @@
 		<?= $this->Form->postLink('Supprimer', ['action' => 'delete_image', $film->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer l\'affiche de ce film ?']); ?>
 		<?php } ?>
 	</figcaption>
-	
+	e
 </figure>
 <p>
 	<span class="label">Réalisateur :</span>
@@ -47,6 +46,18 @@
 	<?php echo $film->modified->i18nFormat('dd/MM/yyyy HH:mm:ss'); ?>
 </p>
 
+<h2>Commentaires</h2>
+<div>
+<?php 
+if (empty($film->comments)) {
+	echo "<p>Aucun commentaire</p>";
+}else foreach ($film->comments as $comment) { ?>
+	<article>
+		<p class="info"><?= $comment->user_id ?>, <?= $comment->created->i18nFormat('dd/MM/yyyy HH:mm:ss') ?> Note :  <?= $comment->grade ?>/5</p>
+		<p><?= ($comment->content) ? $comment->content : 'Pas de commentaire' ?></p>
+	</article>
+<?php } ?>
+</div>
 <div class="row text-center">
 	<?= $this->Html->link('Edit', ['action' => 'edit', $film->id], ['class' => 'col-3 link']); ?>
 

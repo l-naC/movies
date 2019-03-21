@@ -11,6 +11,10 @@ class UsersTable extends Table
 	public function initialize(array $config)
     {
     	$this->addBehavior('Timestamp');
+
+        $this->hasMany('Comments', [
+            'foreignKey' => 'user_id'
+        ]);
     }
 
     public function validationDefault(Validator $v)

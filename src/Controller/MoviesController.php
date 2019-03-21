@@ -16,8 +16,10 @@ class MoviesController extends AppController
 
     public function view($id)
     {
-        //recupere l'element qui a l'id chercher
-        $one = $this->Movies->get($id);
+        //recupere les infos du film qui a l'$id, avec en plus ses commentaires associés
+        $one = $this->Movies->get($id, [
+            'contain' => ['Comments']
+        ]);
         //Transmet la variable $one  à la vue en changeant le nom par citation
         $this->set('film', $one);
     }
