@@ -178,7 +178,6 @@ class MoviesController extends AppController
             //sinon on declenche une erreur personnalisé
             throw new NotFoundException('Methode interdite (c\'est pas beau de tricher)');   
         }
-        
     }
 
     public function deleteImage($id)
