@@ -25,7 +25,7 @@ $cakeDescription = 'Gestionnaire de films';
         <nav>
             <?= $this->Html->link('Liste des films', ['controller' => 'movies', 'action' => 'index'], [ 'class' => ($this->templatePath == 'Movies' && $this->template == 'index') ? 'active' : '']) ?>
             <?= $this->Html->link('Film random', ['controller' => 'movies', 'action' => 'random'], [ 'class' => ($this->templatePath == 'Movies' && $this->template == 'view') ? 'active' : '']) ?>
-                <?= $this->Html->link('Ajouter un film', ['controller' => 'movies', 'action' => 'add'], [ 'class' => ($this->templatePath == 'Movies' && $this->template == 'add') ? 'active' : '']) ?>
+            <?= $this->Html->link('Ajouter un film', ['controller' => 'movies', 'action' => 'add'], [ 'class' => ($this->templatePath == 'Movies' && $this->template == 'add') ? 'active' : '']) ?>
             <?= $this->Html->link('Liste des utilisateurs', ['controller' => 'users', 'action' => 'index'], [ 'class' => ($this->templatePath == 'Users' && $this->template == 'index') ? 'active' : '']) ?>
             <?php if(!($auth->user())) { ?>
                 <?= $this->Html->link('Créer un compte', ['controller' => 'users', 'action' => 'add'], [ 'class' => ($this->templatePath == 'Users' && $this->template == 'add') ? 'active' : '']) ?>
