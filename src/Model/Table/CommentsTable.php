@@ -13,8 +13,8 @@ class CommentsTable extends Table
     	//demande a Cake de gerer tous seul le created et modified
     	$this->addBehavior('Timestamp');
 
-        //un commentaire appartient a un efilm (ils sont lié par la colonne movie_id)
-        $this->belongsTo('Movie', [
+        //un commentaire appartient a un film (ils sont lié par la colonne movie_id)
+        $this->belongsTo('Movies', [
             'foreignKey' => 'movie_id',
             'joinType' => 'INNER'
         ]);
